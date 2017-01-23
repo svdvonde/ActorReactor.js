@@ -1,0 +1,9 @@
+{
+  "name": "ActorReactor.js",
+  "version": "0.0.1",
+  "scripts": {},
+  "dependencies": {
+    "node-uuid": "^1.4.7",
+    "spiders.js": "../Spiders.js"
+  }
+}
