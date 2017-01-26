@@ -1,17 +1,29 @@
 /**
  * Created by samva on 23/01/2017.
  */
-var uuid = require('node-uuid');
-class Subscriber {
-    constructor(uuid, actor) {
+let spider = require('spiders.js/src/spiders');
+class Subscriber extends spider.Isolate {
+    constructor(uuid, reference) {
+        super();
         this.uuid = uuid;
-        this.reference = actor;
+        this.reference = reference;
     }
+    getReference() { return this.reference; }
+    getUUID() { return this.uuid; }
 }
 exports.Subscriber = Subscriber;
-class SubscriberManager {
+class SubscriberManager extends spider.Isolate {
     constructor() {
-        this.subscriberMap = {};
+        super();
+        this.subscriberMap = new spider.Isolate();
+        this.Subscriber = Subscriber;
+    }
+    // From http://byronsalau.com/blog/how-to-create-a-guid-uuid-in-javascript/
+    generateUUID() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
     }
     getSubscribers(key) {
         if (key in this.subscriberMap)
@@ -22,10 +34,15 @@ class SubscriberManager {
     setSubscribers(key, subscribers) {
         this.subscriberMap[key] = subscribers;
     }
-    addSubscriber(key, subscriber) {
-        let subscribers = this.getSubscribers(key);
-        let subscriptionIdentifier = uuid.v4();
-        subscribers.push(new Subscriber(subscriptionIdentifier, subscriber));
+    addSubscriber(key, subscriberReference) {
+        let subscriptionIdentifier = this.generateUUID();
+        let subscriber = new this.Subscriber(subscriptionIdentifier, subscriberReference);
+        if (!(key in this.subscriberMap))
+            this.subscriberMap[key] = [subscriber];
+        else {
+            let subscribers = this.getSubscribers(key);
+            subscribers.push(subscriber);
+        }
         return subscriptionIdentifier;
     }
     removeSubscriber(key, subscriptionIdentifier) {

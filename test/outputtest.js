@@ -8,23 +8,38 @@ class testApp extends actorreactor.Application {
 }
 var app = new testApp();
 
-class outputProducer extends app.Actor {
+class OutputProducer extends actorreactor.Actor {
     produceOutput() {
-        this.broadcast("exampleOutput", Math.random())
+        this.broadcast("exampleOutput", 1);
     }
 }
 
-class outputReceiver extends app.Actor {
-
-    init(someActor) {
-        this.reactTo(someActor, "exampleOutput", this.print);
-    }
-
+class Printer extends actorreactor.Actor {
     print(value) {
-        console.log(value);
+        console.log("PRINT: " + value);
     }
 }
 
-var outputActor = app.spawnActor(outputProducer);
-var printActor  = app.spawnActor(outputReceiver,[],8082);
-actor.produceOutput();
+class OutputEchoer extends actorreactor.Reactor {
+    react(testInput) {
+        let reactionCounter = testInput.scan(count => count + 1, 0);
+        this.broadcast(reactionCounter, "testReactorBroadcast")
+    }
+}
+
+let outputActor = app.spawnActor(OutputProducer);
+
+let echoReactor = app.spawnReactor(OutputEchoer, [[outputActor, "exampleOutput"]], 8081);
+
+let printActor  = app.spawnActor(Printer,[],8082);
+printActor.reactTo([echoReactor, "testReactorBroadcast"], "print");
+
+setTimeout(function (){
+    outputActor.produceOutput();
+    setTimeout(function (){
+        outputActor.produceOutput();
+    }, 2000);
+}, 2000);
+
+
+

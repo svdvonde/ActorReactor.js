@@ -2,32 +2,52 @@
  * Created by samva on 23/01/2017.
  */
 const subscribers_1 = require("./subscribers");
-const subscriptions_1 = require("./subscriptions");
-var spiders = require('spiders.js/src/spiders');
-class Actor extends spiders.Actor {
+let spider = require('spiders.js/src/spiders');
+class SubscriptionManager extends spider.Isolate {
+    constructor() {
+        super();
+        this.subscriptionMap = new spider.Isolate();
+    }
+    getHandler(subscriptionIdentifier) {
+        return this.subscriptionMap[subscriptionIdentifier];
+    }
+    addHandler(subscriptionIdentifier, handler) {
+        this.subscriptionMap[subscriptionIdentifier] = handler;
+    }
+    removeHandler(subscriptionIdentifier) {
+        delete this.subscriptionMap[subscriptionIdentifier];
+    }
+}
+class Actor extends spider.Actor {
     constructor() {
         super();
         this.subscriberManager = new subscribers_1.SubscriberManager();
-        this.subscriptionManager = new subscriptions_1.SubscriptionManager();
+        this.subscriptionManager = new SubscriptionManager();
     }
     addSubscriber(key, subscriber) {
         return this.subscriberManager.addSubscriber(key, subscriber);
     }
-    reactTo(source, output, handler) {
-        let subscriptionIdentifier = source.addSubscriber(output, this);
-        this.subscriptionManager.addHandler(subscriptionIdentifier, handler);
+    reactTo(signalReference, handler) {
+        let source = signalReference[0];
+        let output = signalReference[1];
+        source.addSubscriber(output, this).then((subscriptionIdentifier) => {
+            this.subscriptionManager.addHandler(subscriptionIdentifier, handler);
+        });
     }
-    broadcast(key, value) {
+    broadcast(key, ...values) {
         let subscriptions = this.subscriberManager.getSubscribers(key);
-        for (let subscription of subscriptions) {
-            let subscriber = subscription.reference;
-            let subscriptionIdentifier = subscription.uuid;
-            subscriber.receiveBroadcast(this, subscriptionIdentifier, value);
-        }
+        subscriptions.forEach((subscription) => {
+            let subscriber = subscription.getReference();
+            let subscriptionIdentifier = subscription.getUUID();
+            subscriber.receiveBroadcast(this, subscriptionIdentifier, values);
+        });
     }
-    receiveBroadcast(source, subscriptionIdentifier, value) {
-        let handler = this.subscriptionManager.getHandler(subscriptionIdentifier);
-        console.log("received value: " + value);
+    receiveBroadcast(source, subscriptionIdentifier, values) {
+        let strHandler = this.subscriptionManager.getHandler(subscriptionIdentifier);
+        if (strHandler in this)
+            this[strHandler].apply(this, values);
+        else
+            throw new Error("Actor cannot react to received value, because the method " + strHandler + " does not exist on the receiving actor");
     }
 }
 exports.Actor = Actor;
