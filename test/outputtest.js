@@ -34,12 +34,14 @@ let echoReactor = app.spawnReactor(OutputEchoer, [[outputActor, "exampleOutput"]
 let printActor  = app.spawnActor(Printer,[],8082);
 printActor.reactTo([echoReactor, "testReactorBroadcast"], "print");
 
+
+
 setTimeout(function (){
     outputActor.produceOutput();
     setTimeout(function (){
         outputActor.produceOutput();
-    }, 2000);
+        setTimeout(function (){
+            outputActor.produceOutput();
+        }, 1000);
+    }, 1000);
 }, 2000);
-
-
-

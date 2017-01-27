@@ -1,7 +1,9 @@
 {
   "name": "ActorReactor.js",
   "version": "0.0.1",
-  "scripts": {},
+  "scripts": {
+    "build-client-test": "browserify client-test/test.js -o client-test/application-bundle.js"
+  },
   "dependencies": {
     "@reactivex/rxjs": "^5.0.3",
     "node-uuid": "^1.4.7",

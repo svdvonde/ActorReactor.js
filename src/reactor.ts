@@ -7,10 +7,9 @@
  */
 
 import {SubscriberManager} from "./subscribers";
-import {Actor} from "./actor";
 import {SpiderLib, FarRef} from "spiders.js/src/spiders"
 import {SignalReference} from "./application";
-import {Subject, Observable} from "@reactivex/rxjs"
+import {Observable} from "@reactivex/rxjs"
 
 let spider:SpiderLib = require('spiders.js/src/spiders');
 
@@ -20,7 +19,7 @@ export abstract class Reactor extends spider.Actor {
 
 
     RxJS; // no type signature because this is the entire library
-    RxSubjects : Subject<any>[];
+    RxSubjects : any[];
 
     constructor(inputSources : SignalReference[]) {
         super();
@@ -29,20 +28,27 @@ export abstract class Reactor extends spider.Actor {
         this.RxSubjects = [];
         this.signalSources = inputSources;
 
-        if (inputSources.length === 0)
-            throw new Error("A reactor was spawned without any input sources. This does not make sense, as it will not be reacting to anything.");
     }
 
     init() {
-        // TODO: require does not work in the browser, so in order to run on the client you should import a script instead
-        this.RxJS = require('@reactivex/rxjs');
+        // typeof importScripts checks that this code runs in the scope of a web worker.
+        // I mean, the fact that this is a reactor means that it does, but nevertheless if we do not include this check
+        // it will complain that importScripts is undefined
+        if (this.isBrowser())
+            importScripts("http://localhost:63342/ActorReactor.js/scripts/Rx.min.js");
+        else
+            this.RxJS = require('@reactivex/rxjs');
 
         for(let signalReference of this.signalSources) {
             let source = signalReference[0];
             let output = signalReference[1];
 
+            if (this.isBrowser())
+                var rxSubject : any = new Rx.Subject();
+            else
+                var rxSubject : any = new this.RxJS.Subject();
 
-            let rxSubject = new this.RxJS.Subject();
+
             this.RxSubjects.push(rxSubject);
 
             let identifierPromise = source.addSubscriber(output, this);
@@ -55,12 +61,14 @@ export abstract class Reactor extends spider.Actor {
         if ("react" in this)
             this["react"].apply(this, this.RxSubjects);
         else
-            throw new Error("Reactor will not work because the 'react' method is not implemented");
+            throw new Error("Reactor will not do anything because the 'react' method is not implemented");
     }
+
 
     addSubscriber(key : string, subscriber: FarRef) : string {
         return this.subscriberManager.addSubscriber(key, subscriber);
     }
+
 
     broadcast(observable : Observable<any>, key: string) : void {
         observable.subscribe((value : any) => {
@@ -75,10 +83,16 @@ export abstract class Reactor extends spider.Actor {
         });
     }
 
-    receiveBroadcast(source: FarRef, subscriptionIdentifier: string, values: any) : void {
+
+    receiveBroadcast(source : FarRef, subscriptionIdentifier : string, values : any[]) : void {
         if (subscriptionIdentifier in this)
             this[subscriptionIdentifier](values);
         else
             throw new Error("Reactor received broadcasted value to which it has no subscription... Ignoring the broadcast.");
+    }
+
+
+    private isBrowser() : boolean {
+        return !((typeof process === 'object') && (typeof process.versions === 'object') && (typeof process.versions.node !== 'undefined'));
     }
 }

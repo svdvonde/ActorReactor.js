@@ -12,16 +12,22 @@ class Reactor extends spider.Actor {
         this.subscriberManager = new subscribers_1.SubscriberManager();
         this.RxSubjects = [];
         this.signalSources = inputSources;
-        if (inputSources.length === 0)
-            throw new Error("A reactor was spawned without any input sources. This does not make sense, as it will not be reacting to anything.");
     }
     init() {
-        // TODO: require does not work in the browser, so in order to run on the client you should import a script instead
-        this.RxJS = require('@reactivex/rxjs');
+        // typeof importScripts checks that this code runs in the scope of a web worker.
+        // I mean, the fact that this is a reactor means that it does, but nevertheless if we do not include this check
+        // it will complain that importScripts is undefined
+        if (this.isBrowser())
+            importScripts("http://localhost:63342/ActorReactor.js/scripts/Rx.min.js");
+        else
+            this.RxJS = require('@reactivex/rxjs');
         for (let signalReference of this.signalSources) {
             let source = signalReference[0];
             let output = signalReference[1];
-            let rxSubject = new this.RxJS.Subject();
+            if (this.isBrowser())
+                var rxSubject = new Rx.Subject();
+            else
+                var rxSubject = new this.RxJS.Subject();
             this.RxSubjects.push(rxSubject);
             let identifierPromise = source.addSubscriber(output, this);
             identifierPromise.then((subscriptionIdentifier) => {
@@ -31,7 +37,7 @@ class Reactor extends spider.Actor {
         if ("react" in this)
             this["react"].apply(this, this.RxSubjects);
         else
-            throw new Error("Reactor will not work because the 'react' method is not implemented");
+            throw new Error("Reactor will not do anything because the 'react' method is not implemented");
     }
     addSubscriber(key, subscriber) {
         return this.subscriberManager.addSubscriber(key, subscriber);
@@ -51,6 +57,9 @@ class Reactor extends spider.Actor {
             this[subscriptionIdentifier](values);
         else
             throw new Error("Reactor received broadcasted value to which it has no subscription... Ignoring the broadcast.");
+    }
+    isBrowser() {
+        return !((typeof process === 'object') && (typeof process.versions === 'object') && (typeof process.versions.node !== 'undefined'));
     }
 }
 exports.Reactor = Reactor;
