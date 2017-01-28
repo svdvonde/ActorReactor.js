@@ -8,8 +8,10 @@
 
 import {SubscriberManager} from "./subscribers";
 import {SpiderLib, FarRef} from "spiders.js/src/spiders"
-import {SignalReference} from "./application";
 import {Observable} from "@reactivex/rxjs"
+import {SignalReference} from "./application";
+import {isBrowser} from "./utilities"
+
 
 let spider:SpiderLib = require('spiders.js/src/spiders');
 
@@ -17,49 +19,44 @@ export abstract class Reactor extends spider.Actor {
     subscriberManager : SubscriberManager;
     signalSources : SignalReference[];
 
-
     RxJS; // no type signature because this is the entire library
-    RxSubjects : any[];
 
-    constructor(inputSources : SignalReference[]) {
+    constructor(... inputSources : SignalReference[]) {
         super();
 
         this.subscriberManager = new SubscriberManager();
-        this.RxSubjects = [];
         this.signalSources = inputSources;
-
     }
 
     init() {
-        // typeof importScripts checks that this code runs in the scope of a web worker.
-        // I mean, the fact that this is a reactor means that it does, but nevertheless if we do not include this check
-        // it will complain that importScripts is undefined
-        if (this.isBrowser())
-            importScripts("http://localhost:63342/ActorReactor.js/scripts/Rx.min.js");
+        if (isBrowser())
+            importScripts("http://localhost:63342/ActorReactor.js/scripts/Rx.umd.js");
         else
             this.RxJS = require('@reactivex/rxjs');
 
+        let RxSubjects = [];
+
         for(let signalReference of this.signalSources) {
+
             let source = signalReference[0];
             let output = signalReference[1];
 
-            if (this.isBrowser())
-                var rxSubject : any = new Rx.Subject();
+            if (isBrowser())
+                // Rx will be imported by the importScripts statement that loads the Rx library
+                var rxSubject = new Rx.Subject();
             else
-                var rxSubject : any = new this.RxJS.Subject();
+                var rxSubject = new this.RxJS.Subject();
 
+            RxSubjects.push(rxSubject);
 
-            this.RxSubjects.push(rxSubject);
-
-            let identifierPromise = source.addSubscriber(output, this);
-            identifierPromise.then(
+            source.addSubscriber(output, this).then(
                 (subscriptionIdentifier) => {
-                    this[subscriptionIdentifier] = (value : any) => { rxSubject.next(value); };
+                    this[subscriptionIdentifier] = function (value: any) { rxSubject.next(value); };
                 });
         }
 
         if ("react" in this)
-            this["react"].apply(this, this.RxSubjects);
+            this["react"].apply(this, RxSubjects);
         else
             throw new Error("Reactor will not do anything because the 'react' method is not implemented");
     }
@@ -91,8 +88,4 @@ export abstract class Reactor extends spider.Actor {
             throw new Error("Reactor received broadcasted value to which it has no subscription... Ignoring the broadcast.");
     }
 
-
-    private isBrowser() : boolean {
-        return !((typeof process === 'object') && (typeof process.versions === 'object') && (typeof process.versions.node !== 'undefined'));
-    }
 }

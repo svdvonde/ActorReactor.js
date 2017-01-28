@@ -1,10 +1,11 @@
 
-
 var actorreactor = require('../src/application');
 
 
 class testApp extends actorreactor.Application {
-
+    constructor() {
+        super();
+    }
 }
 var app = new testApp();
 
@@ -27,13 +28,12 @@ class OutputEchoer extends actorreactor.Reactor {
     }
 }
 
+
 let outputActor = app.spawnActor(OutputProducer);
-
 let echoReactor = app.spawnReactor(OutputEchoer, [[outputActor, "exampleOutput"]], 8081);
-
 let printActor  = app.spawnActor(Printer,[],8082);
-printActor.reactTo([echoReactor, "testReactorBroadcast"], "print");
 
+printActor.reactTo([echoReactor, "testReactorBroadcast"], "print");
 
 
 setTimeout(function (){

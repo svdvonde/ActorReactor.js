@@ -8,7 +8,6 @@ let spider:SpiderLib = require('spiders.js/src/spiders');
 
 type SubscriberClass = { new(...args: any[]): Subscriber; };
 
-
 export class Subscriber extends spider.Isolate {
     uuid: string;
     reference: FarRef;

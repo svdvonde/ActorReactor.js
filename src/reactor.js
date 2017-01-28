@@ -5,37 +5,35 @@
  * Created by samva on 23/01/2017.
  */
 const subscribers_1 = require("./subscribers");
+const utilities_1 = require("./utilities");
 let spider = require('spiders.js/src/spiders');
 class Reactor extends spider.Actor {
-    constructor(inputSources) {
+    constructor(...inputSources) {
         super();
         this.subscriberManager = new subscribers_1.SubscriberManager();
-        this.RxSubjects = [];
         this.signalSources = inputSources;
     }
     init() {
-        // typeof importScripts checks that this code runs in the scope of a web worker.
-        // I mean, the fact that this is a reactor means that it does, but nevertheless if we do not include this check
-        // it will complain that importScripts is undefined
-        if (this.isBrowser())
-            importScripts("http://localhost:63342/ActorReactor.js/scripts/Rx.min.js");
+        if (utilities_1.isBrowser())
+            importScripts("http://localhost:63342/ActorReactor.js/scripts/Rx.umd.js");
         else
             this.RxJS = require('@reactivex/rxjs');
+        let RxSubjects = [];
         for (let signalReference of this.signalSources) {
             let source = signalReference[0];
             let output = signalReference[1];
-            if (this.isBrowser())
+            if (utilities_1.isBrowser())
+                // Rx will be imported by the importScripts statement that loads the Rx library
                 var rxSubject = new Rx.Subject();
             else
                 var rxSubject = new this.RxJS.Subject();
-            this.RxSubjects.push(rxSubject);
-            let identifierPromise = source.addSubscriber(output, this);
-            identifierPromise.then((subscriptionIdentifier) => {
-                this[subscriptionIdentifier] = (value) => { rxSubject.next(value); };
+            RxSubjects.push(rxSubject);
+            source.addSubscriber(output, this).then((subscriptionIdentifier) => {
+                this[subscriptionIdentifier] = function (value) { rxSubject.next(value); };
             });
         }
         if ("react" in this)
-            this["react"].apply(this, this.RxSubjects);
+            this["react"].apply(this, RxSubjects);
         else
             throw new Error("Reactor will not do anything because the 'react' method is not implemented");
     }
@@ -57,9 +55,6 @@ class Reactor extends spider.Actor {
             this[subscriptionIdentifier](values);
         else
             throw new Error("Reactor received broadcasted value to which it has no subscription... Ignoring the broadcast.");
-    }
-    isBrowser() {
-        return !((typeof process === 'object') && (typeof process.versions === 'object') && (typeof process.versions.node !== 'undefined'));
     }
 }
 exports.Reactor = Reactor;
