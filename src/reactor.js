@@ -5,7 +5,6 @@
  * Created by samva on 23/01/2017.
  */
 const subscribers_1 = require("./subscribers");
-const utilities_1 = require("./utilities");
 let spider = require('spiders.js/src/spiders');
 class Reactor extends spider.Actor {
     constructor(...inputSources) {
@@ -14,31 +13,44 @@ class Reactor extends spider.Actor {
         this.signalSources = inputSources;
     }
     init() {
-        if (utilities_1.isBrowser())
+        let reactorThis = this;
+        let observerBroadcastExtension = function (exportReference) {
+            reactorThis.broadcast(this, exportReference);
+            return this; // return the observable for further chaining
+        };
+        if (this.isBrowser()) {
             importScripts("http://localhost:63342/ActorReactor.js/scripts/Rx.umd.js");
-        else
+            Rx.Observable.prototype.broadcastAs = observerBroadcastExtension;
+        }
+        else {
             this.RxJS = require('@reactivex/rxjs');
-        let RxSubjects = [];
+            this.RxJS.Observable.prototype.broadcastAs = observerBroadcastExtension;
+        }
+        let RxObservables = [];
         for (let signalReference of this.signalSources) {
             let source = signalReference[0];
             let output = signalReference[1];
-            if (utilities_1.isBrowser())
+            if (this.isBrowser())
                 // Rx will be imported by the importScripts statement that loads the Rx library
                 var rxSubject = new Rx.Subject();
             else
                 var rxSubject = new this.RxJS.Subject();
-            RxSubjects.push(rxSubject);
+            RxObservables.push(rxSubject);
             source.addSubscriber(output, this).then((subscriptionIdentifier) => {
-                this[subscriptionIdentifier] = function (value) { rxSubject.next(value); };
+                this[subscriptionIdentifier] = function (value) {
+                    // an array of arguments is passed, but for a reactor there should only be one argument
+                    // thus take the first argument of the argument list, and use it as the reactive value
+                    rxSubject.next(value[0]);
+                };
             });
         }
         if ("react" in this)
-            this["react"].apply(this, RxSubjects);
+            this["react"].apply(this, RxObservables);
         else
             throw new Error("Reactor will not do anything because the 'react' method is not implemented");
     }
-    addSubscriber(key, subscriber) {
-        return this.subscriberManager.addSubscriber(key, subscriber);
+    addSubscriber(exportReference, subscriber) {
+        return this.subscriberManager.addSubscriber(exportReference, subscriber);
     }
     broadcast(observable, key) {
         observable.subscribe((value) => {
@@ -55,6 +67,9 @@ class Reactor extends spider.Actor {
             this[subscriptionIdentifier](values);
         else
             throw new Error("Reactor received broadcasted value to which it has no subscription... Ignoring the broadcast.");
+    }
+    isBrowser() {
+        return !((typeof process === 'object') && (typeof process.versions === 'object') && (typeof process.versions.node !== 'undefined'));
     }
 }
 exports.Reactor = Reactor;

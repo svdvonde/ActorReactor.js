@@ -3,12 +3,17 @@ var actorreactor = require('../src/application');
 
 class testApp extends actorreactor.Application {
 
+    init() {
+        const example = Rx.Observable.fromEvent(window.document.getElementById('example'), 'keyup')
+            .map(i => i.currentTarget.value)
+            .debounceTime(500) //wait .5s between keyups to emit current value and throw away all other values
+            .broadcastAs("textInput");
+    }
 }
-var app = new testApp();
 
-class OutputProducer extends actorreactor.Actor {
-    produceOutput() {
-        this.broadcast("exampleOutput", 1);
+class CharacterCounter extends actorreactor.Reactor {
+    react(input) {
+        input.map(str => str.length).broadcastAs("length");
     }
 }
 
@@ -18,28 +23,12 @@ class Printer extends actorreactor.Actor {
     }
 }
 
-class OutputEchoer extends actorreactor.Reactor {
-    react(testInput) {
-        let reactionCounter = testInput.scan(count => count + 1, 0);
-        this.broadcast(reactionCounter, "testReactorBroadcast")
-    }
-}
+let application = new testApp();
+let characterCounter = application.spawnReactor(CharacterCounter, [[application, "textInput"]]);
+let printer  = application.spawnActor(Printer, [], 8081);
+
+printer.reactTo([application, "textInput"], "print");
+printer.reactTo([characterCounter, "length"], "print");
 
 
-let outputActor = app.spawnActor(OutputProducer, []);
-let echoReactor = app.spawnReactor(OutputEchoer, [[outputActor, "exampleOutput"]], 8081);
-let printActor  = app.spawnActor(Printer,[],8082);
-
-printActor.reactTo([echoReactor, "testReactorBroadcast"], "print");
-
-
-setTimeout(function (){
-    outputActor.produceOutput();
-    setTimeout(function (){
-        outputActor.produceOutput();
-        setTimeout(function (){
-            outputActor.produceOutput();
-        }, 1000);
-    }, 1000);
-}, 2000);
-
+application.init();

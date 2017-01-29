@@ -9,9 +9,7 @@
 import {SubscriberManager} from "./subscribers";
 import {SpiderLib, FarRef} from "spiders.js/src/spiders"
 import {Observable} from "@reactivex/rxjs"
-import {SignalReference} from "./application";
-import {isBrowser} from "./utilities"
-
+import {SignalReference, ExportReference} from "./application";
 
 let spider:SpiderLib = require('spiders.js/src/spiders');
 
@@ -29,41 +27,55 @@ export abstract class Reactor extends spider.Actor {
     }
 
     init() {
-        if (isBrowser())
-            importScripts("http://localhost:63342/ActorReactor.js/scripts/Rx.umd.js");
-        else
-            this.RxJS = require('@reactivex/rxjs');
+        let reactorThis = this;
+        let observerBroadcastExtension = function(exportReference : ExportReference) {
+            reactorThis.broadcast(this, exportReference);
+            return this; // return the observable for further chaining
+        };
 
-        let RxSubjects = [];
+        if (this.isBrowser()) {
+            importScripts("http://localhost:63342/ActorReactor.js/scripts/Rx.umd.js");
+            Rx.Observable.prototype.broadcastAs = observerBroadcastExtension;
+        }
+        else {
+            this.RxJS = require('@reactivex/rxjs');
+            this.RxJS.Observable.prototype.broadcastAs = observerBroadcastExtension;
+        }
+
+        let RxObservables = [];
 
         for(let signalReference of this.signalSources) {
 
             let source = signalReference[0];
             let output = signalReference[1];
 
-            if (isBrowser())
+            if (this.isBrowser())
                 // Rx will be imported by the importScripts statement that loads the Rx library
                 var rxSubject = new Rx.Subject();
             else
                 var rxSubject = new this.RxJS.Subject();
 
-            RxSubjects.push(rxSubject);
+            RxObservables.push(rxSubject);
 
             source.addSubscriber(output, this).then(
                 (subscriptionIdentifier) => {
-                    this[subscriptionIdentifier] = function (value: any) { rxSubject.next(value); };
+                    this[subscriptionIdentifier] = function (value: any) {
+                        // an array of arguments is passed, but for a reactor there should only be one argument
+                        // thus take the first argument of the argument list, and use it as the reactive value
+                        rxSubject.next(value[0]);
+                    };
                 });
         }
 
         if ("react" in this)
-            this["react"].apply(this, RxSubjects);
+            this["react"].apply(this, RxObservables);
         else
             throw new Error("Reactor will not do anything because the 'react' method is not implemented");
     }
 
 
-    addSubscriber(key : string, subscriber: FarRef) : string {
-        return this.subscriberManager.addSubscriber(key, subscriber);
+    addSubscriber(exportReference : ExportReference, subscriber: FarRef) : string {
+        return this.subscriberManager.addSubscriber(exportReference, subscriber);
     }
 
 
@@ -88,4 +100,7 @@ export abstract class Reactor extends spider.Actor {
             throw new Error("Reactor received broadcasted value to which it has no subscription... Ignoring the broadcast.");
     }
 
+    isBrowser() : boolean {
+        return !((typeof process === 'object') && (typeof process.versions === 'object') && (typeof process.versions.node !== 'undefined'));
+    }
 }

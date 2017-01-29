@@ -4,12 +4,17 @@ var actorreactor = require('../src/application');
 
 class testApp extends actorreactor.Application {
 
+    init() {
+        const example = Rx.Observable.fromEvent(window.document.getElementById('example'), 'keyup')
+            .map(i => i.currentTarget.value)
+            .debounceTime(500) //wait .5s between keyups to emit current value and throw away all other values
+            .broadcastAs("textInput");
+    }
 }
-var app = new testApp();
 
-class OutputProducer extends actorreactor.Actor {
-    produceOutput() {
-        this.broadcast("exampleOutput", 1);
+class CharacterCounter extends actorreactor.Reactor {
+    react(input) {
+        input.map(str => str.length).broadcastAs("length");
     }
 }
 
@@ -19,32 +24,15 @@ class Printer extends actorreactor.Actor {
     }
 }
 
-class OutputEchoer extends actorreactor.Reactor {
-    react(testInput) {
-        let reactionCounter = testInput.scan(count => count + 1, 0);
-        this.broadcast(reactionCounter, "testReactorBroadcast")
-    }
-}
+let application = new testApp();
+let characterCounter = application.spawnReactor(CharacterCounter, [[application, "textInput"]]);
+let printer  = application.spawnActor(Printer, [], 8081);
+
+printer.reactTo([application, "textInput"], "print");
+printer.reactTo([characterCounter, "length"], "print");
 
 
-let outputActor = app.spawnActor(OutputProducer, []);
-let echoReactor = app.spawnReactor(OutputEchoer, [[outputActor, "exampleOutput"]], 8081);
-let printActor  = app.spawnActor(Printer,[],8082);
-
-printActor.reactTo([echoReactor, "testReactorBroadcast"], "print");
-
-
-setTimeout(function (){
-    outputActor.produceOutput();
-    setTimeout(function (){
-        outputActor.produceOutput();
-        setTimeout(function (){
-            outputActor.produceOutput();
-        }, 1000);
-    }, 1000);
-}, 2000);
-
-
+application.init();
 },{"../src/application":453}],2:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
@@ -42824,9 +42812,8 @@ class Actor extends spider.Actor {
         this.subscriberManager = new subscribers_1.SubscriberManager();
         this.subscriptionManager = new SubscriptionManager();
     }
-    addSubscriber(key, subscriber) {
-        console.log("adding subscriber to actor");
-        return this.subscriberManager.addSubscriber(key, subscriber);
+    addSubscriber(exportReference, subscriber) {
+        return this.subscriberManager.addSubscriber(exportReference, subscriber);
     }
     reactTo(signalReference, handler) {
         let source = signalReference[0];
@@ -42854,27 +42841,57 @@ class Actor extends spider.Actor {
 exports.Actor = Actor;
 
 },{"./subscribers":455,"spiders.js/src/spiders":428}],453:[function(require,module,exports){
+(function (process){
 /**
  * Created by samva on 23/01/2017.
  */
 const actor_1 = require("./actor");
 const reactor_1 = require("./reactor");
+const subscribers_1 = require("./subscribers");
 let spider = require('spiders.js/src/spiders');
-class Application extends spider.Application {
-    constructor() {
-        super();
-    }
+class ActorReactorApplication extends spider.Application {
     // Do not provide a type signature for reactorClass. If we say the type is "Reactor", then it will complain that we cannot create an instance of an abstract class
     // In reality the passed class will be a non-abstract extension of the Reactor class
     spawnReactor(reactorClass, sources, port) {
         return this.spawnActor(reactorClass, sources, port);
     }
+    static isBrowser() {
+        return !((typeof process === 'object') && (typeof process.versions === 'object') && (typeof process.versions.node !== 'undefined'));
+    }
 }
-exports.Application = Application;
+class ActorReactorClientApplication extends ActorReactorApplication {
+    constructor() {
+        super();
+        this.subscriberManager = new subscribers_1.SubscriberManager();
+        let actorThis = this;
+        Rx.Observable.prototype.broadcastAs = function (exportReference) {
+            actorThis.broadcast(this, exportReference);
+            return this; // return observable for further chaining
+        };
+    }
+    addSubscriber(exportReference, subscriber) {
+        return this.subscriberManager.addSubscriber(exportReference, subscriber);
+    }
+    broadcast(observable, exportReference) {
+        observable.subscribe((value) => {
+            let subscriptions = this.subscriberManager.getSubscribers(exportReference);
+            subscriptions.forEach((subscription) => {
+                let subscriber = subscription.getReference();
+                let subscriptionIdentifier = subscription.getUUID();
+                subscriber.receiveBroadcast(this, subscriptionIdentifier, [value]);
+            });
+        });
+    }
+}
+if (ActorReactorApplication.isBrowser())
+    exports.Application = ActorReactorClientApplication;
+else
+    exports.Application = ActorReactorApplication;
 exports.Actor = actor_1.Actor;
 exports.Reactor = reactor_1.Reactor;
 
-},{"./actor":452,"./reactor":454,"spiders.js/src/spiders":428}],454:[function(require,module,exports){
+}).call(this,require('_process'))
+},{"./actor":452,"./reactor":454,"./subscribers":455,"_process":576,"spiders.js/src/spiders":428}],454:[function(require,module,exports){
 (function (process){
 /**
  * Created by samva on 24/01/2017.
@@ -42891,12 +42908,20 @@ class Reactor extends spider.Actor {
         this.signalSources = inputSources;
     }
     init() {
-        console.log(this.signalSources);
-        if (this.isBrowser())
+        let reactorThis = this;
+        let observerBroadcastExtension = function (exportReference) {
+            reactorThis.broadcast(this, exportReference);
+            return this; // return the observable for further chaining
+        };
+        if (this.isBrowser()) {
             importScripts("http://localhost:63342/ActorReactor.js/scripts/Rx.umd.js");
-        else
+            Rx.Observable.prototype.broadcastAs = observerBroadcastExtension;
+        }
+        else {
             this.RxJS = require('@reactivex/rxjs');
-        let RxSubjects = [];
+            this.RxJS.Observable.prototype.broadcastAs = observerBroadcastExtension;
+        }
+        let RxObservables = [];
         for (let signalReference of this.signalSources) {
             let source = signalReference[0];
             let output = signalReference[1];
@@ -42905,18 +42930,22 @@ class Reactor extends spider.Actor {
                 var rxSubject = new Rx.Subject();
             else
                 var rxSubject = new this.RxJS.Subject();
-            RxSubjects.push(rxSubject);
+            RxObservables.push(rxSubject);
             source.addSubscriber(output, this).then((subscriptionIdentifier) => {
-                this[subscriptionIdentifier] = function (value) { rxSubject.next(value); };
+                this[subscriptionIdentifier] = function (value) {
+                    // an array of arguments is passed, but for a reactor there should only be one argument
+                    // thus take the first argument of the argument list, and use it as the reactive value
+                    rxSubject.next(value[0]);
+                };
             });
         }
         if ("react" in this)
-            this["react"].apply(this, RxSubjects);
+            this["react"].apply(this, RxObservables);
         else
             throw new Error("Reactor will not do anything because the 'react' method is not implemented");
     }
-    addSubscriber(key, subscriber) {
-        return this.subscriberManager.addSubscriber(key, subscriber);
+    addSubscriber(exportReference, subscriber) {
+        return this.subscriberManager.addSubscriber(exportReference, subscriber);
     }
     broadcast(observable, key) {
         observable.subscribe((value) => {

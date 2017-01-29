@@ -24,8 +24,8 @@ class Actor extends spider.Actor {
         this.subscriberManager = new subscribers_1.SubscriberManager();
         this.subscriptionManager = new SubscriptionManager();
     }
-    addSubscriber(key, subscriber) {
-        return this.subscriberManager.addSubscriber(key, subscriber);
+    addSubscriber(exportReference, subscriber) {
+        return this.subscriberManager.addSubscriber(exportReference, subscriber);
     }
     reactTo(signalReference, handler) {
         let source = signalReference[0];

@@ -2,7 +2,7 @@
  * Created by samva on 23/01/2017.
  */
 
-import {SignalReference} from "./application"
+import {SignalReference, ExportReference} from "./application"
 import {SubscriberManager} from "./subscribers";
 import {SpiderLib, FarRef, Isolate} from "spiders.js/src/spiders"
 let spider:SpiderLib = require('spiders.js/src/spiders');
@@ -40,8 +40,8 @@ export abstract class Actor extends spider.Actor {
         this.subscriptionManager = new SubscriptionManager();
     }
 
-    addSubscriber(key : string, subscriber: FarRef) : string {
-        return this.subscriberManager.addSubscriber(key, subscriber);
+    addSubscriber(exportReference : ExportReference, subscriber: FarRef) : string {
+        return this.subscriberManager.addSubscriber(exportReference, subscriber);
     }
 
     reactTo(signalReference : SignalReference, handler: string) : void {
