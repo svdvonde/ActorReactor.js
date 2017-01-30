@@ -18,6 +18,7 @@ class SubscriptionManager extends spider.Isolate {
         delete this.subscriptionMap[subscriptionIdentifier];
     }
 }
+exports.SubscriptionManager = SubscriptionManager;
 class Actor extends spider.Actor {
     constructor() {
         super();
@@ -30,9 +31,15 @@ class Actor extends spider.Actor {
     reactTo(signalReference, handler) {
         let source = signalReference[0];
         let output = signalReference[1];
-        source.addSubscriber(output, this).then((subscriptionIdentifier) => {
+        if (source === this) {
+            let subscriptionIdentifier = this.addSubscriber(output, this);
             this.subscriptionManager.addHandler(subscriptionIdentifier, handler);
-        });
+        }
+        else {
+            source.addSubscriber(output, this).then((subscriptionIdentifier) => {
+                this.subscriptionManager.addHandler(subscriptionIdentifier, handler);
+            });
+        }
     }
     broadcast(key, ...values) {
         let subscriptions = this.subscriberManager.getSubscribers(key);

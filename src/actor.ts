@@ -8,7 +8,7 @@ import {SpiderLib, FarRef, Isolate} from "spiders.js/src/spiders"
 let spider:SpiderLib = require('spiders.js/src/spiders');
 
 
-class SubscriptionManager extends spider.Isolate {
+export class SubscriptionManager extends spider.Isolate {
     subscriptionMap : Isolate;
 
     constructor() {
@@ -48,10 +48,16 @@ export abstract class Actor extends spider.Actor {
         let source = signalReference[0];
         let output = signalReference[1];
 
-        source.addSubscriber(output, this).then(
-            (subscriptionIdentifier) => {
-                this.subscriptionManager.addHandler(subscriptionIdentifier, handler);
-            });
+        if (source === this) {
+            let subscriptionIdentifier = this.addSubscriber(output, this);
+            this.subscriptionManager.addHandler(subscriptionIdentifier, handler);
+        }
+        else {
+            source.addSubscriber(output, this).then(
+                (subscriptionIdentifier) => {
+                    this.subscriptionManager.addHandler(subscriptionIdentifier, handler);
+                });
+        }
     }
 
     broadcast(key: string, ... values: any[]) : void {
