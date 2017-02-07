@@ -3,7 +3,7 @@ var actorreactor = require('../src/application');
 
 class testApp extends actorreactor.Application {
 
-    init() {
+    initialize() {
         this.inputField = window.document.getElementById('example');
         this.textRelayField = window.document.getElementById('typed_text');
         this.textLengthField = window.document.getElementById('text_length');
@@ -26,6 +26,7 @@ class CharacterCounter extends actorreactor.Reactor {
 }
 
 class Printer extends actorreactor.Actor {
+
     print(value) {
         console.log("PRINT: " + value);
     }
@@ -41,4 +42,4 @@ printer.reactTo([characterCounter, "length"], "print");
 application.reactTo([application, "textInput"], "displayText");
 application.reactTo([characterCounter, "length"], "displayLength");
 
-application.init();
+application.initialize();

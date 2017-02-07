@@ -4,7 +4,7 @@ var actorreactor = require('../src/application');
 
 class testApp extends actorreactor.Application {
 
-    init() {
+    initialize() {
         this.inputField = window.document.getElementById('example');
         this.textRelayField = window.document.getElementById('typed_text');
         this.textLengthField = window.document.getElementById('text_length');
@@ -27,6 +27,7 @@ class CharacterCounter extends actorreactor.Reactor {
 }
 
 class Printer extends actorreactor.Actor {
+
     print(value) {
         console.log("PRINT: " + value);
     }
@@ -42,7 +43,7 @@ printer.reactTo([characterCounter, "length"], "print");
 application.reactTo([application, "textInput"], "displayText");
 application.reactTo([characterCounter, "length"], "displayLength");
 
-application.init();
+application.initialize();
 },{"../src/application":453}],2:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
@@ -37243,27 +37244,18 @@ const sockets_1 = require("./sockets");
 /**
  * Created by flo on 18/01/2017.
  */
+var utils = require("./utils");
 class ChannelManager extends commMedium_1.CommMedium {
     init(messageHandler) {
         this.messageHandler = messageHandler;
         this.connections = new Map();
         this.socketHandler = new sockets_1.SocketHandler(this);
-        this.portsOpened = false;
-        this.bufferedMsgs = new Map();
-    }
-    portsInit() {
-        this.portsOpened = true;
-        this.bufferedMsgs.forEach((msgs, receiverId) => {
-            msgs.forEach((msg) => {
-                this.sendMessage(receiverId, msg);
-            });
-        });
     }
     newConnection(actorId, channelPort) {
+        this.connections.set(actorId, channelPort);
         channelPort.onmessage = (ev) => {
             this.messageHandler.dispatch(JSON.parse(ev.data), ev.ports);
         };
-        this.connections.set(actorId, channelPort);
     }
     //Open connection to Node.js instance owning the object to which the far reference refers to
     openConnection(actorId, actorAddress, actorPort) {
@@ -37275,29 +37267,31 @@ class ChannelManager extends commMedium_1.CommMedium {
         var disconnected = this.socketHandler.disconnectedActors.indexOf(actorId) != -1;
         return inChannel || connected || disconnected;
     }
-    sendMessage(actorId, message) {
-        if (!this.portsOpened) {
-            if (this.bufferedMsgs.has(actorId)) {
-                this.bufferedMsgs.get(actorId).push(message);
-            }
-            else {
-                this.bufferedMsgs.set(actorId, [message]);
-            }
-        }
-        else if (this.connections.has(actorId)) {
+    sendMessage(actorId, message, first = true) {
+        if (this.connections.has(actorId)) {
             this.connections.get(actorId).postMessage(JSON.stringify(message));
         }
         else if (this.connectedActors.has(actorId) || this.socketHandler.disconnectedActors.indexOf(actorId) != -1) {
             this.socketHandler.sendMessage(actorId, message);
         }
         else {
-            throw new Error("Unable to send message to unknown actor (channel manager)");
+            //Dirty, but it could be that an actor sends a message to the application actor, leading it to spawn a new actor and returning this new reference.
+            //Upon receiving this reference the spawning actor immediatly invokes a method on the reference, but hasn't received the open ports message
+            if (first) {
+                var that = this;
+                setTimeout(() => {
+                    that.sendMessage(actorId, message, false);
+                }, 10);
+            }
+            else {
+                throw new Error("Unable to send message to unknown actor (channel manager)");
+            }
         }
     }
 }
 exports.ChannelManager = ChannelManager;
 
-},{"./commMedium":421,"./sockets":427}],419:[function(require,module,exports){
+},{"./commMedium":421,"./sockets":427,"./utils":429}],419:[function(require,module,exports){
 /**
  * Created by flo on 22/12/2016.
  */
@@ -37415,14 +37409,14 @@ else {
     promisePool = new PromisePool_1.PromisePool();
     objectPool = new objectPool_1.ObjectPool();
     var thisRef = new farRef_1.ServerFarReference(objectPool_1.ObjectPool._BEH_OBJ_ID, thisId, address, port, null, null, null, null);
-    var behaviourObject = serialisation_1.reconstructObject({}, JSON.parse(process.argv[7]), JSON.parse(process.argv[8]), thisRef, promisePool, socketManager, objectPool);
+    var behaviourObject = serialisation_1.reconstructBehaviour({}, JSON.parse(process.argv[7]), JSON.parse(process.argv[8]), thisRef, promisePool, socketManager, objectPool);
     objectPool.installBehaviourObject(behaviourObject);
     messageHandler = new messageHandler_1.MessageHandler(thisRef, socketManager, promisePool, objectPool);
     socketManager.init(messageHandler);
     parentRef = new farRef_1.ServerFarReference(objectPool_1.ObjectPool._BEH_OBJ_ID, parentId, address, parentPort, thisRef, socketManager, promisePool, objectPool);
     var parentServer = parentRef;
     socketManager.openConnection(parentServer.ownerId, parentServer.ownerAddress, parentServer.ownerPort);
-    utils.installSTDLib(thisRef, parentRef, behaviourObject, messageHandler, socketManager, promisePool);
+    utils.installSTDLib(false, thisRef, parentRef, behaviourObject, messageHandler, socketManager, promisePool);
 }
 
 }).call(this,require('_process'))
@@ -37630,24 +37624,27 @@ class MessageHandler {
         }
     }
     //Only received as first message by a web worker (i.e. newly spawned client side actor)
-    handleInstall(msg, mainPort) {
+    handleInstall(msg, ports) {
         var thisId = msg.actorId;
         var mainId = msg.mainId;
         var thisRef = new farRef_1.ClientFarReference(objectPool_1.ObjectPool._BEH_OBJ_ID, thisId, mainId, null, this.commMedium, this.promisePool, this.objectPool);
-        var behaviourObject = serialisation_1.reconstructObject({}, msg.vars, msg.methods, thisRef, this.promisePool, this.commMedium, this.objectPool);
+        var behaviourObject = serialisation_1.reconstructBehaviour({}, msg.vars, msg.methods, thisRef, this.promisePool, this.commMedium, this.objectPool);
+        var otherActorIds = msg.otherActorIds;
         this.objectPool.installBehaviourObject(behaviourObject);
         this.thisRef = thisRef;
         var parentRef = new farRef_1.ClientFarReference(objectPool_1.ObjectPool._BEH_OBJ_ID, mainId, mainId, this.thisRef, this.commMedium, this.promisePool, this.objectPool);
         var channelManag = this.commMedium;
+        var mainPort = ports[0];
         channelManag.newConnection(mainId, mainPort);
-        utils.installSTDLib(thisRef, parentRef, behaviourObject, this, channelManag, this.promisePool);
+        otherActorIds.forEach((id, index) => {
+            //Ports at position 0 contains main channel (i.e. channel used to communicate with application actor)
+            channelManag.newConnection(id, ports[index + 1]);
+        });
+        utils.installSTDLib(false, thisRef, parentRef, behaviourObject, this, channelManag, this.promisePool);
     }
     handleOpenPort(msg, port) {
         var channelManager = this.commMedium;
         channelManager.newConnection(msg.actorId, port);
-    }
-    handlePortsOpened() {
-        this.commMedium.portsInit();
     }
     handleFieldAccess(msg) {
         var targetObject = this.objectPool.getObject(msg.objectId);
@@ -37673,7 +37670,8 @@ class MessageHandler {
         });
         var retVal;
         try {
-            retVal = targetObject[methodName].apply(targetObject, deserialisedArgs);
+            //retVal = targetObject[methodName].apply(targetObject,deserialisedArgs)
+            retVal = targetObject[methodName](...deserialisedArgs);
             var serialised = serialisation_1.serialise(retVal, this.thisRef, msg.senderId, this.commMedium, this.promisePool, this.objectPool);
             var message = new messages_1.ResolvePromiseMessage(this.thisRef, msg.promiseId, serialised);
             if (msg.senderType == messages_1.Message.serverSenderType) {
@@ -37730,6 +37728,20 @@ class MessageHandler {
         this.promisePool.resolvePromise(msg.promiseId, farRef.proxyify());
     }
     handleRoute(msg) {
+        //TODO temp fix , works but should be refactored
+        if (msg.message.typeTag == messages_1._METHOD_INVOC_) {
+            var args = msg.message.args;
+            args.forEach((valContainer) => {
+                if (valContainer.type == serialisation_1.ValueContainer.clientFarRefType) {
+                    var container = valContainer;
+                    if (container.contactId == null) {
+                        container.contactId = this.thisRef.ownerId;
+                        container.contactAddress = this.thisRef.ownerAddress;
+                        container.contactPort = this.thisRef.ownerPort;
+                    }
+                }
+            });
+        }
         this.commMedium.sendMessage(msg.targetId, msg.message);
     }
     //Ports are needed for client side actor communication and cannot be serialised together with message objects (is always empty for server-side code)
@@ -37737,13 +37749,10 @@ class MessageHandler {
     dispatch(msg, ports = [], clientSocket = null) {
         switch (msg.typeTag) {
             case messages_1._INSTALL_BEHAVIOUR_:
-                this.handleInstall(msg, ports[0]);
+                this.handleInstall(msg, ports);
                 break;
             case messages_1._OPEN_PORT_:
                 this.handleOpenPort(msg, ports[0]);
-                break;
-            case messages_1._PORTS_OPENED_:
-                this.handlePortsOpened();
                 break;
             case messages_1._FIELD_ACCESS_:
                 this.handleFieldAccess(msg);
@@ -37799,12 +37808,13 @@ Message.clientSenderType = "_CLIENT_";
 exports.Message = Message;
 exports._INSTALL_BEHAVIOUR_ = 0;
 class InstallBehaviourMessage extends Message {
-    constructor(senderRef, mainId, actorId, vars, methods) {
+    constructor(senderRef, mainId, actorId, vars, methods, otherActorIds) {
         super(exports._INSTALL_BEHAVIOUR_, senderRef);
         this.mainId = mainId;
         this.actorId = actorId;
         this.vars = vars;
         this.methods = methods;
+        this.otherActorIds = otherActorIds;
     }
 }
 exports.InstallBehaviourMessage = InstallBehaviourMessage;
@@ -37857,14 +37867,7 @@ class OpenPortMessage extends Message {
     }
 }
 exports.OpenPortMessage = OpenPortMessage;
-exports._PORTS_OPENED_ = 6;
-class PortsOpenedMessage extends Message {
-    constructor(senderRef) {
-        super(exports._PORTS_OPENED_, senderRef);
-    }
-}
-exports.PortsOpenedMessage = PortsOpenedMessage;
-exports._CONNECT_REMOTE_ = 7;
+exports._CONNECT_REMOTE_ = 6;
 class ConnectRemoteMessage extends Message {
     constructor(senderRef, promiseId, connectionId) {
         super(exports._CONNECT_REMOTE_, senderRef);
@@ -37873,7 +37876,7 @@ class ConnectRemoteMessage extends Message {
     }
 }
 exports.ConnectRemoteMessage = ConnectRemoteMessage;
-exports._RESOLVE_CONNECTION_ = 8;
+exports._RESOLVE_CONNECTION_ = 7;
 class ResolveConnectionMessage extends Message {
     constructor(senderRef, promiseId, connectionId) {
         super(exports._RESOLVE_CONNECTION_, senderRef);
@@ -37882,7 +37885,7 @@ class ResolveConnectionMessage extends Message {
     }
 }
 exports.ResolveConnectionMessage = ResolveConnectionMessage;
-exports._ROUTE_ = 9;
+exports._ROUTE_ = 8;
 class RouteMessage extends Message {
     constructor(senderRef, targetId, message) {
         super(exports._ROUTE_, senderRef);
@@ -37957,16 +37960,20 @@ function getObjectMethods(object) {
     return methods;
 }
 exports.getObjectMethods = getObjectMethods;
-function deconstructBehaviour(object, accumVars, accumMethods, thisRef, receiverId, commMedium, promisePool, objectPool) {
+function deconstructBehaviour(object, currentLevel, accumVars, accumMethods, thisRef, receiverId, commMedium, promisePool, objectPool) {
     var properties = Reflect.ownKeys(object);
+    var localAccumVars = [];
     for (var i in properties) {
         var key = properties[i];
         var val = Reflect.get(object, key);
         if (typeof val != 'function' || isIsolateClass(val)) {
             var serialisedval = serialise(val, thisRef, receiverId, commMedium, promisePool, objectPool);
-            accumVars.push([key, serialisedval]);
+            localAccumVars.push([key, serialisedval]);
         }
     }
+    localAccumVars.unshift(currentLevel);
+    accumVars.push(localAccumVars);
+    var localAccumMethods = [];
     var proto = object.__proto__;
     properties = Reflect.ownKeys(proto);
     properties.shift();
@@ -37976,16 +37983,62 @@ function deconstructBehaviour(object, accumVars, accumMethods, thisRef, receiver
             var key = properties[i];
             var method = Reflect.get(proto, key);
             if (typeof method == 'function') {
-                accumMethods.push([key, method.toString()]);
+                localAccumMethods.push([key, method.toString()]);
             }
         }
-        return deconstructBehaviour(proto, accumVars, accumMethods, thisRef, receiverId, commMedium, promisePool, objectPool);
+        localAccumMethods.unshift(currentLevel + 1);
+        accumMethods.push(localAccumMethods);
+        return deconstructBehaviour(proto, currentLevel + 1, accumVars, accumMethods, thisRef, receiverId, commMedium, promisePool, objectPool);
     }
     else {
         return [accumVars, accumMethods];
     }
 }
 exports.deconstructBehaviour = deconstructBehaviour;
+function reconstructBehaviour(baseObject, variables, methods, thisRef, promisePool, commMedium, objectPool) {
+    var amountOfProtos = methods.length;
+    for (var i = 0; i < amountOfProtos; i++) {
+        var copy = baseObject.__proto__;
+        var newProto = {};
+        newProto.__proto__ = copy;
+        baseObject.__proto__ = newProto;
+    }
+    variables.forEach((levelVariables) => {
+        var installIn = getProtoForLevel(levelVariables[0], baseObject);
+        levelVariables.shift();
+        levelVariables.forEach((varEntry) => {
+            var key = varEntry[0];
+            var rawVal = varEntry[1];
+            var val = deserialise(thisRef, rawVal, promisePool, commMedium, objectPool);
+            installIn[key] = val;
+        });
+    });
+    methods.forEach((levelMethods) => {
+        var installIn = getProtoForLevel(levelMethods[0], baseObject);
+        levelMethods.shift();
+        levelMethods.forEach((methodEntry) => {
+            var key = methodEntry[0];
+            var functionSource = methodEntry[1];
+            //Ugly but re-serialised isolates have functions, not methods (semantically the same, not the same when stringified). This is a quick-fix
+            if (functionSource.startsWith("function")) {
+                var method = eval("with(baseObject){(" + functionSource + ")}");
+            }
+            else {
+                var method = eval("with(baseObject){(function " + functionSource + ")}");
+            }
+            installIn[key] = method;
+        });
+    });
+    return baseObject;
+}
+exports.reconstructBehaviour = reconstructBehaviour;
+function getProtoForLevel(level, object) {
+    var ret = object;
+    for (var i = 0; i < level; i++) {
+        ret = ret.__proto__;
+    }
+    return ret;
+}
 function reconstructObject(baseObject, variables, methods, thisRef, promisePool, commMedium, objectPool) {
     variables.forEach((varEntry) => {
         var key = varEntry[0];
@@ -38003,7 +38056,7 @@ function reconstructObject(baseObject, variables, methods, thisRef, promisePool,
         else {
             var method = eval("with(baseObject){(function " + functionSource + ")}");
         }
-        Object.getPrototypeOf(baseObject)[key] = method;
+        (baseObject.__proto__)[key] = method;
     });
     return baseObject;
 }
@@ -38021,6 +38074,7 @@ ValueContainer.arrayType = 4;
 ValueContainer.isolateType = 5;
 ValueContainer.isolateDefType = 6;
 ValueContainer.clientFarRefType = 7;
+ValueContainer.arrayIsolateType = 8;
 exports.ValueContainer = ValueContainer;
 class NativeContainer extends ValueContainer {
     constructor(value) {
@@ -38091,6 +38145,14 @@ class IsolateDefinitionContainer extends ValueContainer {
     }
 }
 exports.IsolateDefinitionContainer = IsolateDefinitionContainer;
+class ArrayIsolateContainer extends ValueContainer {
+    constructor(array) {
+        super(ValueContainer.arrayIsolateType);
+        this.array = array;
+    }
+}
+ArrayIsolateContainer.checkArrayIsolateFuncKey = "_INSTANCEOF_ARRAY_ISOLATE_";
+exports.ArrayIsolateContainer = ArrayIsolateContainer;
 function isClass(func) {
     return typeof func === 'function' && /^\s*class\s+/.test(func.toString());
 }
@@ -38119,17 +38181,14 @@ function serialiseObject(object, thisRef, objectPool) {
 }
 function serialise(value, thisRef, receiverId, commMedium, promisePool, objectPool) {
     if (typeof value == 'object') {
-        if (value instanceof Promise) {
+        if (value == null) {
+            return new NativeContainer(null);
+        }
+        else if (value instanceof Promise) {
             return serialisePromise(value, thisRef, receiverId, commMedium, promisePool, objectPool);
         }
         else if (value instanceof Error) {
             return new ErrorContainer(value);
-        }
-        else if (value instanceof Array) {
-            var values = value.map((val) => {
-                return serialise(val, thisRef, receiverId, commMedium, promisePool, objectPool);
-            });
-            return new ArrayContainer(values);
         }
         else if (value[farRef_1.FarReference.ServerProxyTypeKey]) {
             var farRef = value[farRef_1.FarReference.farRefAccessorKey];
@@ -38144,6 +38203,15 @@ function serialise(value, thisRef, receiverId, commMedium, promisePool, objectPo
             else {
                 return new ClientFarRefContainer(farRef.objectId, farRef.ownerId, farRef.mainId, farRef.contactId, farRef.contactAddress, farRef.contactPort);
             }
+        }
+        else if (value[ArrayIsolateContainer.checkArrayIsolateFuncKey]) {
+            return new ArrayIsolateContainer(value.array);
+        }
+        else if (value instanceof Array) {
+            var values = value.map((val) => {
+                return serialise(val, thisRef, receiverId, commMedium, promisePool, objectPool);
+            });
+            return new ArrayContainer(values);
         }
         else if (value[IsolateContainer.checkIsolateFuncKey]) {
             var vars = getObjectVars(value, thisRef, receiverId, commMedium, promisePool, objectPool);
@@ -38218,6 +38286,9 @@ function deserialise(thisRef, value, promisePool, commMedium, objectPool) {
         classObj.prototype[IsolateContainer.checkIsolateFuncKey] = true;
         return classObj;
     }
+    function deSerialiseArrayIsolate(arrayIsolateContainer) {
+        return arrayIsolateContainer.array;
+    }
     switch (value.type) {
         case ValueContainer.nativeType:
             return value.value;
@@ -38235,8 +38306,10 @@ function deserialise(thisRef, value, promisePool, commMedium, objectPool) {
             return deSerialiseIsolate(value);
         case ValueContainer.isolateDefType:
             return deSerialiseIsolateDefinition(value);
+        case ValueContainer.arrayIsolateType:
+            return deSerialiseArrayIsolate(value);
         default:
-            throw "Unknown value container type :  " + value;
+            throw "Unknown value container type :  " + value.type;
     }
 }
 exports.deserialise = deserialise;
@@ -38361,46 +38434,47 @@ class Isolate {
     }
 }
 exports.Isolate = Isolate;
-function updateChannels(app, newActor) {
-    var actors = app.spawnedActors;
-    for (var i in actors) {
-        var workerRef1 = actors[i];
-        var worker1Id = workerRef1[0];
-        var worker1 = workerRef1[1];
-        for (var j in actors) {
-            if (i != j) {
-                var workerRef2 = actors[j];
-                var worker2Id = workerRef2[0];
-                var worker2 = workerRef2[1];
-                var channel = new MessageChannel();
-                worker1.postMessage(JSON.stringify(new messages_1.OpenPortMessage(app.mainRef, worker2Id)), [channel.port1]);
-                worker2.postMessage(JSON.stringify(new messages_1.OpenPortMessage(app.mainRef, worker1Id)), [channel.port2]);
-            }
-        }
+class ArrayIsolate {
+    constructor(array) {
+        this[serialisation_1.ArrayIsolateContainer.checkArrayIsolateFuncKey] = true;
+        this.array = array;
     }
-    newActor.postMessage(JSON.stringify(new messages_1.PortsOpenedMessage(app.mainRef)));
+}
+exports.ArrayIsolate = ArrayIsolate;
+function updateExistingChannels(mainRef, existingActors, newActorId) {
+    var mappings = [[], []];
+    existingActors.forEach((actorPair) => {
+        var workerId = actorPair[0];
+        var worker = actorPair[1];
+        var channel = new MessageChannel();
+        worker.postMessage(JSON.stringify(new messages_1.OpenPortMessage(mainRef, newActorId)), [channel.port1]);
+        mappings[0].push(workerId);
+        mappings[1].push(channel.port2);
+    });
+    return mappings;
 }
 class Actor {
 }
 class ClientActor extends Actor {
     spawn(app) {
         var actorId = utils.generateId();
+        var channelMappings = updateExistingChannels(app.mainRef, app.spawnedActors, actorId);
         var work = require('webworkify');
         var webWorker = work(require('./actorProto'));
         webWorker.addEventListener('message', (event) => {
             app.mainMessageHandler.dispatch(event);
         });
-        var decon = serialisation_1.deconstructBehaviour(this, [], [], app.mainRef, actorId, app.channelManager, app.mainPromisePool, app.mainObjectPool);
+        var decon = serialisation_1.deconstructBehaviour(this, 0, [], [], app.mainRef, actorId, app.channelManager, app.mainPromisePool, app.mainObjectPool);
         var actorVariables = decon[0];
         var actorMethods = decon[1];
         var mainChannel = new MessageChannel();
         //For performance reasons, all messages sent between web workers are stringified (see https://nolanlawson.com/2016/02/29/high-performance-web-worker-messages/)
-        webWorker.postMessage(JSON.stringify(new messages_1.InstallBehaviourMessage(app.mainRef, app.mainId, actorId, actorVariables, actorMethods)), [mainChannel.port1]);
+        var newActorChannels = [mainChannel.port1].concat(channelMappings[1]);
+        webWorker.postMessage(JSON.stringify(new messages_1.InstallBehaviourMessage(app.mainRef, app.mainId, actorId, actorVariables, actorMethods, channelMappings[0])), newActorChannels);
         var channelManager = app.mainCommMedium;
         channelManager.newConnection(actorId, mainChannel.port2);
         var ref = new farRef_1.ClientFarReference(objectPool_1.ObjectPool._BEH_OBJ_ID, actorId, app.mainId, app.mainRef, app.channelManager, app.mainPromisePool, app.mainObjectPool);
         app.spawnedActors.push([actorId, webWorker]);
-        updateChannels(app, webWorker);
         return ref.proxyify();
     }
 }
@@ -38409,7 +38483,7 @@ class ServerActor extends Actor {
         var socketManager = app.mainCommMedium;
         var fork = require('child_process').fork;
         var actorId = utils.generateId();
-        var decon = serialisation_1.deconstructBehaviour(this, [], [], app.mainRef, actorId, socketManager, app.mainPromisePool, app.mainObjectPool);
+        var decon = serialisation_1.deconstructBehaviour(this, 0, [], [], app.mainRef, actorId, socketManager, app.mainPromisePool, app.mainObjectPool);
         var actorVariables = decon[0];
         var actorMethods = decon[1];
         //Uncomment to debug (huray for webstorms)
@@ -38445,6 +38519,7 @@ class ServerApplication extends Application {
         this.mainRef = new farRef_1.ServerFarReference(objectPool_1.ObjectPool._BEH_OBJ_ID, this.mainId, this.mainIp, this.mainPort, null, this.mainCommMedium, this.mainPromisePool, this.mainObjectPool);
         this.mainMessageHandler = new messageHandler_1.MessageHandler(this.mainRef, this.socketManager, this.mainPromisePool, this.mainObjectPool);
         this.socketManager.init(this.mainMessageHandler);
+        utils.installSTDLib(true, this.mainRef, null, this, this.mainMessageHandler, this.mainCommMedium, this.mainPromisePool);
     }
     spawnActor(actorClass, constructorArgs = [], port = 8080) {
         var actorObject = new actorClass(...constructorArgs);
@@ -38466,7 +38541,7 @@ class ClientApplication extends Application {
         this.mainRef = new farRef_1.ClientFarReference(objectPool_1.ObjectPool._BEH_OBJ_ID, this.mainId, this.mainId, null, this.mainCommMedium, this.mainPromisePool, this.mainObjectPool);
         this.mainMessageHandler = new messageHandler_1.MessageHandler(this.mainRef, this.channelManager, this.mainPromisePool, this.mainObjectPool);
         this.channelManager.init(this.mainMessageHandler);
-        this.channelManager.portsInit();
+        utils.installSTDLib(true, this.mainRef, null, this, this.mainMessageHandler, this.mainCommMedium, this.mainPromisePool);
     }
     spawnActor(actorClass, constructorArgs = []) {
         var actorObject = new actorClass(...constructorArgs);
@@ -38492,6 +38567,7 @@ else {
 }).call(this,"/node_modules/spiders.js/src")
 },{"./ChannelManager":418,"./PromisePool":419,"./actorProto":420,"./farRef":422,"./messageHandler":423,"./messages":424,"./objectPool":425,"./serialisation":426,"./sockets":427,"./utils":429,"child_process":456,"webworkify":434}],429:[function(require,module,exports){
 (function (process){
+const spiders_1 = require("./spiders");
 /**
  * Created by flo on 05/12/2016.
  */
@@ -38514,19 +38590,42 @@ function generateId() {
     });
 }
 exports.generateId = generateId;
-function installSTDLib(thisRef, parentRef, behaviourObject, messageHandler, commMedium, promisePool) {
-    behaviourObject["parent"] = parentRef.proxyify();
+function getInitChain(behaviourObject, result) {
+    var properties = Reflect.ownKeys(behaviourObject);
+    //Have reached base level object, end of prototype chain (ugly but works)
+    if (properties.indexOf("init") != -1) {
+        result.unshift(Reflect.get(behaviourObject, "init"));
+    }
+    if (properties.indexOf("valueOf") != -1) {
+        return result;
+    }
+    else {
+        return getInitChain(behaviourObject.__proto__, result);
+    }
+}
+function installSTDLib(appActor, thisRef, parentRef, behaviourObject, messageHandler, commMedium, promisePool) {
+    if (!appActor) {
+        behaviourObject["parent"] = parentRef.proxyify();
+    }
     behaviourObject["remote"] = (address, port) => {
         return commMedium.connectRemote(thisRef, address, port, messageHandler, promisePool);
     };
-    if (Reflect.has(behaviourObject, "init")) {
-        behaviourObject["init"]();
+    behaviourObject["Isolate"] = spiders_1.Isolate;
+    behaviourObject["ArrayIsolate"] = spiders_1.ArrayIsolate;
+    if (!appActor) {
+        var initChain = getInitChain(behaviourObject, []);
+        initChain.forEach((initFunc) => {
+            initFunc.apply(behaviourObject, []);
+        });
     }
+    /*if(Reflect.has(behaviourObject,"init") && !appActor){
+        behaviourObject["init"].apply(behaviourObject,[])
+    }*/
 }
 exports.installSTDLib = installSTDLib;
 
 }).call(this,require('_process'))
-},{"_process":576}],430:[function(require,module,exports){
+},{"./spiders":428,"_process":576}],430:[function(require,module,exports){
 module.exports = toArray
 
 function toArray(list, index) {

@@ -70,4 +70,5 @@ else
     exports.Application = ActorReactorApplication;
 exports.Actor = actor_1.Actor;
 exports.Reactor = reactor_1.Reactor;
+exports.Isolate = spider.Isolate;
 //# sourceMappingURL=application.js.map

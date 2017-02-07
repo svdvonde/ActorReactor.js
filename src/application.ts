@@ -101,3 +101,4 @@ else
 
 exports.Actor = Actor;
 exports.Reactor = Reactor;
+exports.Isolate = spider.Isolate;

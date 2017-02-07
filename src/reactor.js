@@ -19,7 +19,8 @@ class Reactor extends spider.Actor {
             return this; // return the observable for further chaining
         };
         if (this.isBrowser()) {
-            importScripts("http://localhost:63342/ActorReactor.js/scripts/Rx.umd.js");
+            // TODO: importing from non-local source is extremely bad.
+            importScripts("https://npmcdn.com/@reactivex/rxjs@5.0.0-beta.3/dist/global/Rx.umd.js");
             Rx.Observable.prototype.broadcastAs = observerBroadcastExtension;
         }
         else {
@@ -48,6 +49,8 @@ class Reactor extends spider.Actor {
             this["react"].apply(this, RxObservables);
         else
             throw new Error("Reactor will not do anything because the 'react' method is not implemented");
+        if ("imports" in this)
+            this["imports"]();
     }
     addSubscriber(exportReference, subscriber) {
         return this.subscriberManager.addSubscriber(exportReference, subscriber);

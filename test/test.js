@@ -1,35 +1,16 @@
-/**
- * Created by sam on 27/01/2017.
- */
 
-let spider = require('spiders.js/src/spiders');
+var actorreactor = require('../src/application');
 
 
-
-class testApp extends spider.Application{
+class testApp extends actorreactor.Application {
 
 }
-var app = new testApp()
 
-class referencedActor extends spider.Actor {
-    getValue() {
-        return 5;
+class testActorClass extends actorreactor.Actor {
+    init() {
+        console.log("init called");
     }
 }
 
-class referencingActor extends spider.Actor {
-    constructor(actorReference) {
-        super();
-        this.ref = actorReference;
-    }
-
-    getValue(){
-        return this.ref.getValue().then((v) => { return v; });
-    }
-}
-
-
-var actor1 = app.spawnActor(referencedActor);
-var actor2 = app.spawnActor(referencingActor, [actor1], 8081);
-
-actor2.getValue().then((v) => { return v; });
+var app = new testApp();
+let testActor = app.spawnActor(testActorClass);

@@ -4,14 +4,77 @@
     <list default="true" id="287839ff-6c3a-4587-bdf8-4e330179c19a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-test/application-bundle.js" afterPath="$PROJECT_DIR$/client-test/application-bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-test/test.html" afterPath="$PROJECT_DIR$/client-test/test.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-test/test.js" afterPath="$PROJECT_DIR$/client-test/test.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actor.js" afterPath="$PROJECT_DIR$/src/actor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actor.js.map" afterPath="$PROJECT_DIR$/src/actor.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actor.ts" afterPath="$PROJECT_DIR$/src/actor.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/Spiders.js.iml" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/Spiders.js.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/jsLibraryMappings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/libraries/ip_DefinitelyTyped.xml" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/libraries/ip_DefinitelyTyped.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/libraries/node_DefinitelyTyped.xml" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/libraries/node_DefinitelyTyped.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/libraries/protobufjs_DefinitelyTyped.xml" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/libraries/protobufjs_DefinitelyTyped.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/libraries/socket_io_DefinitelyTyped.xml" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/libraries/socket_io_DefinitelyTyped.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/libraries/socket_io_client_DefinitelyTyped.xml" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/libraries/socket_io_client_DefinitelyTyped.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/webResources.xml" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/webResources.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/workspace.xml" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/ClientBenchmarks.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/ClientBenchmarks.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/ClientBenchmarks.js.map" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/ClientBenchmarks.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/ClientBenchmarks.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/ClientBenchmarks.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/N-Queens-First-N-Solutions/NQueensFirstNSolutionsWorker.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/N-Queens-First-N-Solutions/NQueensFirstNSolutionsWorker.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/N-Queens-First-N-Solutions/NQueensFirstNSolutionsWorker.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/N-Queens-First-N-Solutions/NQueensFirstNSolutionsWorker.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationMain.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationMain.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationMain.js.map" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationMain.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationMain.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationMain.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationProducer.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationProducer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationProducer.js.map" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationProducer.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationProducer.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationProducer.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationQuadrant.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationQuadrant.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationQuadrant.js.map" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationQuadrant.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationQuadrant.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Online-Facility-Location/FacilityLocationQuadrant.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/benchUtils.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/benchUtils.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/benchUtils.js.map" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/benchUtils.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/benchUtils.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/benchUtils.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/client-tests/bundle.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/client-tests/bundle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/client-tests/temp.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/client-tests/temp.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/client-tests/test.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/client-tests/test.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/package.json" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/server-tests/server-side.Test.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/server-tests/server-side.Test.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/server-tests/temp.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/server-tests/temp.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/server-tests/temp.js.map" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/server-tests/temp.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/server-tests/temp.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/server-tests/temp.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/ChannelManager.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/ChannelManager.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/ChannelManager.js.map" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/ChannelManager.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/ChannelManager.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/ChannelManager.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/actorProto.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/actorProto.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/actorProto.js.map" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/actorProto.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/actorProto.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/actorProto.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/commMedium.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/commMedium.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/commMedium.js.map" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/commMedium.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/commMedium.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/commMedium.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/farRef.js.map" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/farRef.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/farRef.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/farRef.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/messageHandler.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/messageHandler.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/messageHandler.js.map" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/messageHandler.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/messageHandler.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/messageHandler.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/messages.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/messages.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/messages.js.map" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/messages.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/messages.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/messages.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/serialisation.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/serialisation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/serialisation.js.map" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/serialisation.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/serialisation.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/serialisation.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/sockets.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/sockets.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/sockets.js.map" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/sockets.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/sockets.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/sockets.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/spiders.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/spiders.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/spiders.js.map" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/spiders.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/spiders.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/spiders.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/utils.js" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/utils.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/utils.js.map" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/utils.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/Spiders.js/src/utils.ts" afterPath="$PROJECT_DIR$/node_modules/Spiders.js/src/utils.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/application.js" afterPath="$PROJECT_DIR$/src/application.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/application.js.map" afterPath="$PROJECT_DIR$/src/application.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/application.ts" afterPath="$PROJECT_DIR$/src/application.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reactor.js" afterPath="$PROJECT_DIR$/src/reactor.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reactor.js.map" afterPath="$PROJECT_DIR$/src/reactor.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reactor.ts" afterPath="$PROJECT_DIR$/src/reactor.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/test.js" afterPath="$PROJECT_DIR$/test/test.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -39,11 +102,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client-test/test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="14" lean-forward="false" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+            <state relative-caret-position="375">
+              <caret line="25" column="1" lean-forward="false" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -52,7 +115,7 @@
       <file leaf-file-name="actor.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/actor.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="642">
+            <state relative-caret-position="840">
               <caret line="60" column="5" lean-forward="false" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
               <folding>
                 <element signature="e#44#106#0" expanded="true" />
@@ -61,11 +124,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reactor.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="reactor.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/reactor.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="975">
-              <caret line="70" column="49" lean-forward="false" selection-start-line="70" selection-start-column="49" selection-end-line="70" selection-end-column="49" />
+            <state relative-caret-position="240">
+              <caret line="36" column="55" lean-forward="true" selection-start-line="36" selection-start-column="55" selection-end-line="36" selection-end-column="55" />
               <folding>
                 <element signature="e#88#136#0" expanded="true" />
               </folding>
@@ -76,8 +139,18 @@
       <file leaf-file-name="outputtest.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/outputtest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="1" lean-forward="true" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+            <state relative-caret-position="690">
+              <caret line="46" column="9" lean-forward="false" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/test.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -86,8 +159,8 @@
       <file leaf-file-name="test.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client-test/test.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="25" lean-forward="false" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="25" />
+            <state relative-caret-position="90">
+              <caret line="6" column="86" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="86" />
               <folding />
             </state>
           </provider>
@@ -96,8 +169,8 @@
       <file leaf-file-name="application.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/application.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="57" column="0" lean-forward="true" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+            <state relative-caret-position="1455">
+              <caret line="103" column="33" lean-forward="false" selection-start-line="103" selection-start-column="33" selection-end-line="103" selection-end-column="33" />
               <folding>
                 <element signature="e#44#95#0" expanded="true" />
               </folding>
@@ -108,11 +181,9 @@
       <file leaf-file-name="spiders.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/node_modules/Spiders.js/src/spiders.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2490">
-              <caret line="175" column="4" lean-forward="false" selection-start-line="175" selection-start-column="4" selection-end-line="175" selection-end-column="4" />
-              <folding>
-                <marker date="1485617214000" expanded="true" signature="7252:7563" ph="{...}" />
-              </folding>
+            <state relative-caret-position="2790">
+              <caret line="195" column="4" lean-forward="false" selection-start-line="195" selection-start-column="4" selection-end-line="195" selection-end-column="4" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -152,16 +223,16 @@
         <option value="$PROJECT_DIR$/src/reactor.js" />
         <option value="$PROJECT_DIR$/client-test/application-bundle.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/test/test.js" />
         <option value="$PROJECT_DIR$/src/subscribers.ts" />
-        <option value="$PROJECT_DIR$/test/outputtest.js" />
         <option value="$PROJECT_DIR$/node_modules/Spiders.js/src/spiders.ts" />
         <option value="$PROJECT_DIR$/src/utilities.ts" />
-        <option value="$PROJECT_DIR$/src/reactor.ts" />
         <option value="$PROJECT_DIR$/client-test/test.html" />
-        <option value="$PROJECT_DIR$/src/application.ts" />
         <option value="$PROJECT_DIR$/src/actor.ts" />
+        <option value="$PROJECT_DIR$/test/test.js" />
+        <option value="$PROJECT_DIR$/test/outputtest.js" />
         <option value="$PROJECT_DIR$/client-test/test.js" />
+        <option value="$PROJECT_DIR$/src/application.ts" />
+        <option value="$PROJECT_DIR$/src/reactor.ts" />
       </list>
     </option>
   </component>
@@ -202,7 +273,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -253,6 +323,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="reactor.ts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NestingTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ActorReactor.js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ActorReactor.js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="scripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -274,6 +362,7 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -460,10 +549,10 @@
     </list>
     <recent_temporary>
       <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="npm.build-client-test" />
-        <item index="1" class="java.lang.String" itemvalue="Node.js.outputtest.js" />
-        <item index="2" class="java.lang.String" itemvalue="Node.js.test.js (1)" />
-        <item index="3" class="java.lang.String" itemvalue="Node.js.test.js" />
+        <item index="0" class="java.lang.String" itemvalue="Node.js.outputtest.js" />
+        <item index="1" class="java.lang.String" itemvalue="npm.build-client-test" />
+        <item index="2" class="java.lang.String" itemvalue="Node.js.test.js" />
+        <item index="3" class="java.lang.String" itemvalue="Node.js.test.js (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -499,34 +588,43 @@
       <workItem from="1485635272659" duration="672000" />
       <workItem from="1485699860842" duration="7495000" />
       <workItem from="1485765951425" duration="2354000" />
+      <workItem from="1486289903492" duration="270000" />
+      <workItem from="1486292701026" duration="2332000" />
+      <workItem from="1486326937250" duration="1369000" />
+      <workItem from="1486385501475" duration="587000" />
+      <workItem from="1486390256313" duration="32000" />
+      <workItem from="1486390304889" duration="215000" />
+      <workItem from="1486392906819" duration="717000" />
+      <workItem from="1486478101566" duration="10000" />
+      <workItem from="1486478562860" duration="44000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104953000" />
+    <option name="totallyTimeSpent" value="110529000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1173" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2203125" sideWeight="0.65868264" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2203125" sideWeight="0.6177536" order="3" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2203125" sideWeight="0.34131736" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24365942" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2203125" sideWeight="0.38224638" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24365942" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32971016" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -537,10 +635,6 @@
         <option value="$PROJECT_DIR$/src/application.js" />
         <option value="$PROJECT_DIR$/src/reactor.js" />
         <option value="$PROJECT_DIR$/src/reactor.js.map" />
-        <option value="$PROJECT_DIR$/node_modules/Spiders.js/src/commMedium.js" />
-        <option value="$PROJECT_DIR$/node_modules/Spiders.js/src/ChannelManager.js.map" />
-        <option value="$PROJECT_DIR$/node_modules/Spiders.js/src/ChannelManager.js" />
-        <option value="$PROJECT_DIR$/node_modules/Spiders.js/src/commMedium.js.map" />
         <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Native/A-Star-Search/AStarSearchMain.js" />
         <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Native/A-Star-Search/AStarSearchMaster.js" />
         <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Native/A-Star-Search/AStarSearchWorker.js.map" />
@@ -735,22 +829,8 @@
         <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/benchUtils.js.map" />
         <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/ClientBenchmarks.js" />
         <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/ClientBenchmarks.js.map" />
-        <option value="$PROJECT_DIR$/../Spiders.js/server-tests/temp.js.map" />
-        <option value="$PROJECT_DIR$/../Spiders.js/server-tests/testModule.js" />
-        <option value="$PROJECT_DIR$/../Spiders.js/server-tests/testModule.js.map" />
-        <option value="$PROJECT_DIR$/../Spiders.js/src/commMedium.js" />
-        <option value="$PROJECT_DIR$/../Spiders.js/src/ChannelManager.js.map" />
-        <option value="$PROJECT_DIR$/../Spiders.js/src/ChannelManager.js" />
-        <option value="$PROJECT_DIR$/../Spiders.js/src/commMedium.js.map" />
-        <option value="$PROJECT_DIR$/../Spiders.js/client-tests/clientTestModule.js.map" />
-        <option value="$PROJECT_DIR$/../Spiders.js/client-tests/clientTestModule.js" />
         <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/benchUtils.js.map" />
         <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/benchUtils.js" />
-        <option value="$PROJECT_DIR$/node_modules/Spiders.js/client-tests/clientTestModule.js.map" />
-        <option value="$PROJECT_DIR$/node_modules/Spiders.js/client-tests/clientTestModule.js" />
-        <option value="$PROJECT_DIR$/node_modules/Spiders.js/server-tests/temp.js.map" />
-        <option value="$PROJECT_DIR$/node_modules/Spiders.js/server-tests/testModule.js" />
-        <option value="$PROJECT_DIR$/node_modules/Spiders.js/server-tests/testModule.js.map" />
         <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/ClientBenchmarks.js" />
         <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/ClientBenchmarks.js.map" />
         <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Big/BigActor.js.map" />
@@ -943,6 +1023,106 @@
         <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Recursive-Matrix-Multiplication/RecursiveMatrixMultiplicationWorker.js" />
         <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Recursive-Matrix-Multiplication/RecursiveMatrixMultiplicationMain.js" />
         <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Native/Recursive-Matrix-Multiplication/RecursiveMatrixMultiplicationMain.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/ConcurrentSortedLinkedList.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/RadixSort.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/SleepingBarber.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/ForkJoin-Creation.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/DiningPhilosophers.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/Big.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/ForkJoin-Creation.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/LogisticMapSeries.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/CountingActor.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/RadixSort.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/Big.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/ConcurrentDictionary.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/ThreadRing.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/CountingActor.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/DiningPhilosophers.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/ConcurrentDictionary.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/ConcurrentSortedLinkedList.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/BankTransaction.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/ProducerConsumer.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/SieveOfEratosthenes.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/ProducerConsumer.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/LogisticMapSeries.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/ForkJoin-Throughput.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/ForkJoin-Throughput.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/PingPong.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/PingPong.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/Chameneos.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/Chameneos.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/FilterBank.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/ThreadRing.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/SleepingBarber.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/CigaretteSmokers.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/SieveOfEratosthenes.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/CigaretteSmokers.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/BankTransaction.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/FilterBank.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/src/commMedium.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/src/ChannelManager.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/src/ChannelManager.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/src/commMedium.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/AllPairShortestPath.js" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/UnbalancedCobwebbedTree.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/AStarSearch.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/PrecisePiComputation.js" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/PrecisePiComputation.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/TrapezoidalApproximation.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/RecursiveMatrixMultiplication.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/QuickSort.js" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/UnbalancedCobwebbedTree.js" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/NQueensFirstNSolutions.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/OnlineFacilityLocation.js" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/RecursiveMatrixMultiplication.js" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/SuccessiveOverRelaxation.js" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/OnlineFacilityLocation.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/AStarSearch.js" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/TrapezoidalApproximation.js" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/SuccessiveOverRelaxation.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/QuickSort.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/AllPairShortestPath.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/benchmarks/Client-Benchmarks/Spiders/NQueensFirstNSolutions.js" />
+        <option value="$PROJECT_DIR$/../Spiders.js/SpiderPong/server.js" />
+        <option value="$PROJECT_DIR$/../Spiders.js/SpiderPong/server.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/server-tests/temp.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/server-tests/testModule.js" />
+        <option value="$PROJECT_DIR$/../Spiders.js/server-tests/testModule.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/src/commMedium.js" />
+        <option value="$PROJECT_DIR$/../Spiders.js/src/ChannelManager.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/src/ChannelManager.js" />
+        <option value="$PROJECT_DIR$/../Spiders.js/src/commMedium.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/client-tests/clientTestModule.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/client-tests/clientTestModule.js" />
+        <option value="$PROJECT_DIR$/../Spiders.js/NativePong/server.js.map" />
+        <option value="$PROJECT_DIR$/../Spiders.js/NativePong/server.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/SpiderPong/server.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/SpiderPong/server.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/client-tests/clientTestModule.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/client-tests/clientTestModule.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/server-tests/temp.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/server-tests/testModule.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/server-tests/testModule.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/AllPairShortestPath.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/UnbalancedCobwebbedTree.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/AStarSearch.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/PrecisePiComputation.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/PrecisePiComputation.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/TrapezoidalApproximation.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/RecursiveMatrixMultiplication.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/QuickSort.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/UnbalancedCobwebbedTree.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/NQueensFirstNSolutions.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/OnlineFacilityLocation.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/RecursiveMatrixMultiplication.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/SuccessiveOverRelaxation.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/OnlineFacilityLocation.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/AStarSearch.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/TrapezoidalApproximation.js" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/SuccessiveOverRelaxation.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/QuickSort.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/AllPairShortestPath.js.map" />
+        <option value="$PROJECT_DIR$/node_modules/Spiders.js/benchmarks/Client-Benchmarks/Spiders/NQueensFirstNSolutions.js" />
       </list>
     </option>
   </component>
@@ -996,9 +1176,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="28" column="2" lean-forward="false" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1050,9 +1227,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="616">
           <caret line="28" column="2" lean-forward="true" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1104,9 +1278,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1172,19 +1343,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/reactor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="27" column="41" lean-forward="true" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/Rx.js.map" />
     <entry file="file://$PROJECT_DIR$/client-test/application-bundle.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2510">
           <caret line="42855" column="1" lean-forward="false" selection-start-line="42855" selection-start-column="1" selection-end-line="42855" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1192,15 +1355,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="1" lean-forward="false" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="53" lean-forward="false" selection-start-line="4" selection-start-column="53" selection-end-line="4" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1216,70 +1370,30 @@
     <entry file="file://$PROJECT_DIR$/src/utilities.ts" />
     <entry file="file://$PROJECT_DIR$/node_modules/Spiders.js/src/spiders.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="114" column="18" lean-forward="true" selection-start-line="114" selection-start-column="18" selection-end-line="114" selection-end-column="18" />
+        <state relative-caret-position="239">
+          <caret line="92" column="6" lean-forward="false" selection-start-line="92" selection-start-column="6" selection-end-line="92" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/test.js">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="32" column="38" lean-forward="false" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reactor.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="975">
-          <caret line="70" column="49" lean-forward="false" selection-start-line="70" selection-start-column="49" selection-end-line="70" selection-end-column="49" />
-          <folding>
-            <element signature="e#88#136#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/Spiders.js/src/spiders.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2490">
-          <caret line="175" column="4" lean-forward="false" selection-start-line="175" selection-start-column="4" selection-end-line="175" selection-end-column="4" />
-          <folding>
-            <marker date="1485617214000" expanded="true" signature="7252:7563" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client-test/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="25" lean-forward="false" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="25" />
+        <state relative-caret-position="60">
+          <caret line="4" column="53" lean-forward="false" selection-start-line="4" selection-start-column="53" selection-end-line="4" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/outputtest.js">
+    <entry file="file://$PROJECT_DIR$/client-test/test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="1" lean-forward="true" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+        <state relative-caret-position="375">
+          <caret line="25" column="1" lean-forward="false" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/application.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="57" column="0" lean-forward="true" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding>
-            <element signature="e#44#95#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/actor.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="642">
+        <state relative-caret-position="840">
           <caret line="60" column="5" lean-forward="false" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
           <folding>
             <element signature="e#44#106#0" expanded="true" />
@@ -1287,11 +1401,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client-test/test.js">
+    <entry file="file://$PROJECT_DIR$/test/outputtest.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="14" lean-forward="false" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+        <state relative-caret-position="690">
+          <caret line="46" column="9" lean-forward="false" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1455">
+          <caret line="103" column="33" lean-forward="false" selection-start-line="103" selection-start-column="33" selection-end-line="103" selection-end-column="33" />
+          <folding>
+            <element signature="e#44#95#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/Spiders.js/src/spiders.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2790">
+          <caret line="195" column="4" lean-forward="false" selection-start-line="195" selection-start-column="4" selection-end-line="195" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client-test/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="86" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reactor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="27" column="41" lean-forward="true" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reactor.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="36" column="55" lean-forward="true" selection-start-line="36" selection-start-column="55" selection-end-line="36" selection-end-column="55" />
+          <folding>
+            <element signature="e#88#136#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
